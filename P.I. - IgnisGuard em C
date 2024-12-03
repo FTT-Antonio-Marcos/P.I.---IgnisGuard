@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <locale.h>
+
+#define NUM_ETAPAS 5
+
+// Definição de struct para representar uma etapa do projeto
+typedef struct {
+    char nome[50];
+    int progresso; // Progresso em percentual (0 a 100)
+} Etapa;
+
+// Função para exibir o progresso de todas as etapas
+void exibirProgresso(Etapa etapas[], int tamanho) {
+    printf("\nProgresso do Projeto:\n");
+    for (int i = 0; i < tamanho; i++) {
+        printf("Etapa %d - %s: %d%% concluída\n", i + 1, etapas[i].nome, etapas[i].progresso);
+    }
+}
+
+// Função para verificar se todas as etapas foram concluídas
+bool todasEtapasConcluidas(Etapa etapas[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        if (etapas[i].progresso < 100) {
+            return false; // Pelo menos uma etapa não está concluída
+        }
+    }
+    return true;
+}
+
+int main() {
+	setlocale(LC_ALL, "Portuguese");
+    // Vetor de structs para armazenar as etapas do projeto
+    Etapa etapas[NUM_ETAPAS] = {
+        {"Planejamento", 0},
+        {"Análise de Requisitos", 0},
+        {"Design do Sistema", 0},
+        {"Implementação", 0},
+        {"Testes e Validação", 0}
+    };
+
+    printf("Simulação do Fluxo de Desenvolvimento do Software\n");
+    printf("O projeto possui %d etapas.\n", NUM_ETAPAS);
+
+    while (true) {
+        // Exibir progresso atual
+        exibirProgresso(etapas, NUM_ETAPAS);
+
+        // Atualizar progresso das etapas
+        for (int i = 0; i < NUM_ETAPAS; i++) {
+            printf("\n%s\n", etapas[i].nome);
+            printf("Progresso atual: %d%%\n", etapas[i].progresso);
+            printf("Digite o novo progresso (0 a 100) ou -1 para manter: ");
+            int novoProgresso;
+            scanf("%d", &novoProgresso);
+
+            if (novoProgresso >= 0 && novoProgresso <= 100) {
+                etapas[i].progresso = novoProgresso;
+            }
+        }
+
+        // Verificar se todas as etapas estão concluídas
+        if (todasEtapasConcluidas(etapas, NUM_ETAPAS)) {
+            printf("\nParabéns! Todas as etapas do projeto foram concluídas com sucesso!\n");
+            break;
+        }
+
+        printf("\nAinda há etapas a serem concluídas. Continuando...\n");
+    }
+
+    return 0;
+}
+	
