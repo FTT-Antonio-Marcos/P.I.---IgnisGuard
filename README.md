@@ -1,1 +1,1 @@
-O código deve ser copilado no DevC++ ou algum similhar que consiga copilar e rodar codigos em C.
+O código deve ser compilado no DevC++ ou em algum programa semelhante que consiga compilar e executar códigos em C.
